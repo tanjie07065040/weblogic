@@ -1,14 +1,16 @@
-# weblogic单机+负载均衡安装部署，服务发布以及配置
+# weblogic介绍
 
-## 简介
+[toc]
+
+## 1. 简介
 
 WebLogic是美国Oracle公司出品的一个application server，确切的说是一个基于JAVAEE架构的中间件，WebLogic是用于开发、集成、部署和管理大型分布式Web应用、网络应用和数据库应用的Java应用服务器。将Java的动态功能和Java Enterprise标准的安全性引入大型网络应用的开发、集成、部署和管理之中。
 
 
 
-## 基础操作
+## 2. 基础操作
 
-### 安装部署文档
+### 2.1 weblogic安装
 
 weblogic安装部署文档请参考
 
@@ -16,11 +18,21 @@ weblogic安装部署文档请参考
 
 
 
-### 服务部署和发布
+### 2.2 Nginx安装（负载均衡）
+
+Nginx安装部署以及配置文档请参考
+
+[06nginx安装部署+Nginx配置.docx](./06nginx安装部署+Nginx配置.docx)
+
+
+
+### 2.3 weblogic发布服务
 
 1: 登录weblogic后，初始页面内容中点击左侧的部署，如图：
 
 ![](./weblogicimages/1.png)
+
+
 
 2: 点击安装，根据操作点击下一步 上传自己服务的war包<font color=red>注意：weblogic和Tomcat部署服务有区别，Tomcat会解压war包，weblogic不会解压war，所以上传war时候需要把对应环境的配置都调整好</font> 选择服务所在的server,其他都默认下一步直接到完成，如图：
 
@@ -30,25 +42,23 @@ weblogic安装部署文档请参考
 
 ![](./weblogicimages/4.png)
 
-### 服务负载均衡（Nginx）
-
-Nginx安装部署以及配置文档请参考
-
-[06nginx安装部署+Nginx配置.docx](./06nginx安装部署+Nginx配置.docx)
 
 
+### 2.4 服务基于weblogic集群
 
-### 服务测试(单机+负载均衡)
+暂无
 
 
 
-#### weblogic直连测试
+### 2.5 发布服务测试(单机+负载均衡)
+
+#### 2.5.1 weblogic直连测试--单机
 
 ![](./weblogicimages/5.png)
 
 
 
-#### weblogic+Nginx测试
+#### 2.5.2 weblogic+Nginx测试--负载均衡
 
 ![](./weblogicimages/6.png)
 
@@ -56,25 +66,15 @@ Nginx安装部署以及配置文档请参考
 
 
 
-## 基础配置
+### 2.6 weblogic集群测试
 
-### 发布服务服务配置
-
-<font color=red>发布服务的配置是每次发布服务后都需要重新配置一次</font>
-
-1：回到初始页面可以看到发布好的服务（如果不知道可以点击左侧的部署菜单）
-
-2：选中发布的服务进入到如图界面
-
-![](./weblogicimages/7.png)
-
-3：点击配置进入配置内容，这里主要是调整2个参数 最大内存中会话数（默认是1） JSP页面检查（默认是1）都调整成-1 可以查看后面框定的注释说明-1是不进行任何检查不占用资源
-
-![](./weblogicimages/8.png)
+暂无
 
 
 
-### weblogic系统配置
+## 3. 基础配置
+
+### 3.1 weblogic系统配置
 
 <font color=red>系统配置只需要在对应的Server上配置，不需要重新配置，如果创建新的Server就需要重新配置</font>
 
@@ -117,13 +117,29 @@ Nginx安装部署以及配置文档请参考
 
 
 
-### 查看配置所在文件位置
+### 3.2 发布服务配置
+
+<font color=red>发布服务的配置是每次发布服务后都需要重新配置一次</font>
+
+1：回到初始页面可以看到发布好的服务（如果不知道可以点击左侧的部署菜单）
+
+2：选中发布的服务进入到如图界面
+
+![](./weblogicimages/7.png)
+
+3：点击配置进入配置内容，这里主要是调整2个参数 最大内存中会话数（默认是1） JSP页面检查（默认是1）都调整成-1 可以查看后面框定的注释说明-1是不进行任何检查不占用资源
+
+![](./weblogicimages/8.png)
+
+
+
+### 3.3 查看配置所在文件位置
 
 ![](./weblogicimages/15.png)
 
 
 
-## 通用命令
+## 4. 通用命令
 
 1：启动weblogic命令
 
@@ -159,19 +175,17 @@ cd /usr/local/weblogic/weblogic/user_projects/proddomain/logs
 
 
 
-## 已知问题和遇到的坑
+## 5. 已知问题和遇到的坑
 
-### 服务部署失败
+### 5.1 服务部署失败
 
 部署服务时候回出现服务发布不成功，重启weblogic服务后恢复
 
 
 
-### weblogic初步访问很慢
+### 5.2weblogic初步访问很慢
 
 目前这个是已知问题Java JVM和Linux环境匹配时候（ 实际是JVM在Linux下的bug：他想调用一个随机函数，但是取不到。）
-
-
 
 ~~~
 1)较好的解决办法：
@@ -186,15 +200,17 @@ cd /usr/local/weblogic/weblogic/user_projects/proddomain/logs
 这样可以解决任何一个域Weblogic启动慢的问题的问题
 ~~~
 
+总结：演示环境做了测试目前发现没有多大的效果
 
 
-### weblogic发布服务中集成OData
 
-1：OData中使用的协议 要求
+### 5.3 weblogic发布服务中集成OData
+
+1：OData中使用的协议
 
 ![](./weblogicimages/13.png)
 
-2：现有使用的协议情况
+2：现有系统组件包使用的协议情况
 
 ![](./weblogicimages/14.png)
 
