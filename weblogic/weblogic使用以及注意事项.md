@@ -1,5 +1,11 @@
 # weblogic单机+负载均衡安装部署，服务发布以及配置
 
+## 简介
+
+WebLogic是美国Oracle公司出品的一个application server，确切的说是一个基于JAVAEE架构的中间件，WebLogic是用于开发、集成、部署和管理大型分布式Web应用、网络应用和数据库应用的Java应用服务器。将Java的动态功能和Java Enterprise标准的安全性引入大型网络应用的开发、集成、部署和管理之中。
+
+
+
 ## 基础操作
 
 ### 安装部署文档
@@ -54,6 +60,8 @@ Nginx安装部署以及配置文档请参考
 
 ### 发布服务服务配置
 
+<font color=red>发布服务的配置是每次发布服务后都需要重新配置一次</font>
+
 1：回到初始页面可以看到发布好的服务（如果不知道可以点击左侧的部署菜单）
 
 2：选中发布的服务进入到如图界面
@@ -67,6 +75,8 @@ Nginx安装部署以及配置文档请参考
 
 
 ### weblogic系统配置
+
+<font color=red>系统配置只需要在对应的Server上配置，不需要重新配置，如果创建新的Server就需要重新配置</font>
 
 1：端架左侧菜单环境-》服务器，进入页面后点击我们发布的服务AdminServer(管理)
 
@@ -88,11 +98,13 @@ Nginx安装部署以及配置文档请参考
 
 4：点击“服务器启动”菜单 ，在下面的参数设置如下内容
 
+配置内容：
+
 ~~~
 -Xms2048m  -Xmx2048m  -XX:PermSize=512m -XX:MaxPermSize=1024m
 ~~~
 
-
+配置说明：
 
 ~~~
 -Xmx    Java Heap最大值，默认值为物理内存的1/4，最佳设值视物理内存大小及计算机内其他内存开销而定
@@ -102,6 +114,12 @@ Nginx安装部署以及配置文档请参考
 ~~~
 
 ![](./weblogicimages/12.png)
+
+
+
+### 查看配置所在文件位置
+
+![](./weblogicimages/15.png)
 
 
 
@@ -123,7 +141,7 @@ ps -ef|grep weblogic
 
 3：查看服务器weblogic资源使用
 
-top
+top  查看服务器进程情况
 
 
 
@@ -172,7 +190,13 @@ cd /usr/local/weblogic/weblogic/user_projects/proddomain/logs
 
 ### weblogic发布服务中集成OData
 
-注意OData中使用的协议 
+1：OData中使用的协议 要求
+
+![](./weblogicimages/13.png)
+
+2：现有使用的协议情况
+
+![](./weblogicimages/14.png)
 
 
 
