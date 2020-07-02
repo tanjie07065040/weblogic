@@ -115,6 +115,12 @@ Nginx安装部署以及配置文档请参考
 
 ![](./weblogicimages/12.png)
 
+5: 点击proddomain-》配置-》并发 
+
+参数默认值都是50
+
+![](./weblogicimages/16.png)
+
 
 
 ### 3.2 发布服务配置
@@ -183,7 +189,7 @@ cd /usr/local/weblogic/weblogic/user_projects/proddomain/logs
 
 
 
-### 5.2weblogic初步访问很慢
+### 5.2 weblogic初步访问很慢
 
 目前这个是已知问题Java JVM和Linux环境匹配时候（ 实际是JVM在Linux下的bug：他想调用一个随机函数，但是取不到。）
 
