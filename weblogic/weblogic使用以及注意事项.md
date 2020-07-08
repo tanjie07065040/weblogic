@@ -6,7 +6,7 @@
 
 WebLogic是美国Oracle公司出品的一个application server，确切的说是一个基于JAVAEE架构的中间件，WebLogic是用于开发、集成、部署和管理大型分布式Web应用、网络应用和数据库应用的Java应用服务器。将Java的动态功能和Java Enterprise标准的安全性引入大型网络应用的开发、集成、部署和管理之中。
 
-通俗的讲weblogci是一种web容器，如果你知道apache，tomcat，iis你就应该知道，就是把我们开发的java应用程序运行起来，并提供服务的一种程序。
+通俗的讲weblogic是一种web容器，如果你知道apache，tomcat，iis你就应该知道，就是把我们开发的java应用程序运行起来，并提供服务的一种程序。
 
 ### 1.1 Domain 
 
@@ -57,6 +57,7 @@ Nginx安装部署以及配置文档请参考
 ![](./weblogicimages/2.png)
 
 ![](./weblogicimages/3.png)
+这里发布服务base不用选择，因为base服务状态是shutdown，只有adminserver是running状态
 
 ![](./weblogicimages/4.png)
 
@@ -219,7 +220,7 @@ cd /usr/local/weblogic/weblogic/user_projects/proddomain/logs
 　　将/dev/random 指向/dev/urandom
 3)最好的解决办法：
         修改Linux上Weblogic使用的jdk $JAVA_HOME/jre/lib/security/java.security 文件
-　　将securerandom.source=file:/dev/urandom 修改为 securerandom.source=file:/dev/./urandom
+　　将securerandom.source=file:/dev/random 修改为 securerandom.source=file:/dev/./urandom
 
 这样可以解决任何一个域Weblogic启动慢的问题的问题
 ~~~
@@ -237,6 +238,8 @@ cd /usr/local/weblogic/weblogic/user_projects/proddomain/logs
 2：现有系统组件包使用的协议情况
 
 ![](./weblogicimages/14.png)
+
+使用以上的odata组件后weblogic，Tomcat，java -jar都有odata访问异常问题
 
 
 
