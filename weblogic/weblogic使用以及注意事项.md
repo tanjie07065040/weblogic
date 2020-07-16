@@ -158,6 +158,12 @@ Nginx安装部署以及配置文档请参考
 
 ![](./weblogicimages/12.png)
 
+![](./weblogicimages/18.png)
+
+![](./weblogicimages/19.png)
+
+
+
 日志详细介绍
 
 **服务器日志** 每个 WebLogic Server 实例将来自子系统和应用程序的所有消息写入位于本地主机上的服务器日志文件。默认情况下，服务器日志文件位于服务器实例根目录下的 logs 目录中；例如，DOMAIN_NAME\servers\SERVER_NAME\logs\SERVER_NAME.log，其中 DOMAIN_NAME 是在其中定位域的目录的名称，而 SERVER_NAME 是服务器的名称。
